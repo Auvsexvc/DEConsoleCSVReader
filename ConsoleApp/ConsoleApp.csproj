@@ -43,7 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataMiner.cs" />
     <Compile Include="DataReader.cs" />
+    <Compile Include="ImportedObject.cs" />
+    <Compile Include="ImportedObjectBaseClass.cs" />
+    <Compile Include="Interfaces\IImportedObject.cs" />
+    <Compile Include="Interfaces\IImportedObjectBaseClass.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
