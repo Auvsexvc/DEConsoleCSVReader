@@ -10,3 +10,4 @@ Original code Review:
 6. Some buisness logic needed to be fixed.
 7. Fixed binary expressions
 8. Fixed formatting
+9. Originally StremReader was not disposed - Solution:  enclosed in using statement to ensure its being managed by GC.
