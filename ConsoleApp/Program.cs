@@ -1,14 +1,32 @@
-﻿namespace ConsoleApp
-{
-    public static class Program
-    {
-        private static void Main()
-        {
-            var miner = new DataMiner();
-            var data = miner.ExtractFromFile("data.csv");
+﻿using ConsoleApp.Controllers;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Threading.Tasks;
 
-            var reader = new DataReader(data);
-            reader.Print();
+namespace ConsoleApp
+{
+    public class Program
+    {
+        private static async Task Main()
+        {
+            var serviceProvider = new ServiceCollection()
+                .AddLogging(option => option.AddConsole())
+                .AddSingleton<IDataFileHandler, DataFileHandler>()
+                .AddSingleton<IDataProcessor, DataProcessor>()
+                .AddSingleton<IDataService, DataService>()
+                .AddSingleton<DataController>()
+                .BuildServiceProvider();
+
+            var logger = serviceProvider.GetService<ILoggerFactory>()
+            .CreateLogger<Program>();
+
+            logger.LogDebug("Starting application");
+
+            var reader = serviceProvider.GetService<DataController>();
+            await reader.PrintAsync("data.csv");
+
+            Console.ReadLine();
         }
     }
 }
